@@ -19,7 +19,10 @@ def connect(username: str) -> Response:
 
 @app.route("/pubsub/subscribe/<username>", methods=["GET"])
 def subscribe(username: str) -> Response:
-    return Response(sub.subscribe(db.messagesystem, username), content_type="text/event-stream")
+    return Response(
+        sub.subscribe(db.messagesystem, username), 
+        content_type="text/event-stream"
+    )
 
 @app.route("/pubsub/disconnect/<username>", methods=["GET"])
 def disconnect(username: str) -> Response:
@@ -28,4 +31,5 @@ def disconnect(username: str) -> Response:
 if __name__ == "__main__":
     if db.get_collection("messagesystem") is None:
         db.create_collection("messagesystem")
+        
     app.run(port=8000, debug=True)

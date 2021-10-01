@@ -1,11 +1,9 @@
 import { h } from "preact";
-
 import useSubscriber from "./useSubscriber";
-
-const USERNAME = "John Doe";
+import { v4 } from "uuid";
 
 function App() {
-    const { messages } = useSubscriber(USERNAME);
+    const { messages } = useSubscriber(`John Doe ${v4()}`);
 
     return (
         <div
