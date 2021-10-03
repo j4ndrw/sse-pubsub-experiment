@@ -14,15 +14,15 @@ if __name__ == '__main__':
     if db is None:
         raise Exception("No database found")
 
-    message_system: Collection = db.messagesystem
+    collection: Collection = db.messagesystem
 
     while True:
         message = input("Enter a message to broadcast: ")
 
-        users: Cursor = message_system.find({})
+        users: Cursor = collection.find({})
         for user in users:
             new_messages = [*user["messages"], message]
-            message_system.update_one({"_id": user["_id"]}, {
+            collection.update_one({"_id": user["_id"]}, {
                 "$set": { 
                     "messages": new_messages 
                 }

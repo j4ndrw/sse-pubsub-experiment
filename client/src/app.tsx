@@ -2,8 +2,16 @@ import { h } from "preact";
 import useSubscriber from "./useSubscriber";
 import { v4 } from "uuid";
 
+const USERNAME = `John Doe ${v4()}`;
+
+const api = (endpoint: string) => `http://localhost:8000/pubsub/${endpoint}`;
+
 function App() {
-    const { messages } = useSubscriber(`John Doe ${v4()}`);
+    const { messages } = useSubscriber({
+        connectURL: api(`connect/${USERNAME}`),
+        subscribeURL: api(`subscribe/${USERNAME}`),
+        disconnectURL: api(`disconnect/${USERNAME}`),
+    });
 
     return (
         <div
