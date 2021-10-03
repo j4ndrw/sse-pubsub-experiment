@@ -23,6 +23,7 @@ def subscribe(
             "sent_messages": [],
         })
 
+    # Retrieve any messages that have been sent in the past
     sent_messages = user["sent_messages"]
     if len(sent_messages) > 0:
         for message in sent_messages:
@@ -35,7 +36,7 @@ def subscribe(
         if not user["connected"]:
             return
 
-        # Publish any messages in the user entity
+        # Retrieve any messages in the user entity
         messages = user["messages"]
         if user and len(messages) > 0:        
             for message in messages:
